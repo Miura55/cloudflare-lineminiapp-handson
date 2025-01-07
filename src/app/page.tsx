@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Box, Card, CardContent, CardMedia, Grid, Typography, Button } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -45,7 +46,9 @@ const Menu = () => {
   };
 
   const submitOrder = () => {
+    // TODO: オーダー送信処理
     console.log('Submitting order:', cart);
+    setCart([]);
   };
 
   const CartView = () => (
@@ -57,7 +60,7 @@ const Menu = () => {
         <div>
           <Grid container spacing={4}>
             {cart.map((product, index) => (
-              <Grid item xs={12} key={index}>
+              <Grid size={{xs: 12}} key={index}>
                 <Card className="flex justify-between items-center">
                   <Box display="flex" alignItems="center">
                     <CardMedia
@@ -125,7 +128,7 @@ const Menu = () => {
             <h2 className="text-2xl font-bold mb-4">Menu</h2>
             <Grid container spacing={4}>
               {products.map((product) => (
-                <Grid item xs={12} sm={6} md={4} key={product.id}>
+                <Grid size={{xs: 12, sm:6, md:4}} key={product.id}>
                   <Card className="h-full">
                     <CardMedia
                       component="img"
