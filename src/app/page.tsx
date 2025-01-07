@@ -6,6 +6,8 @@ import Grid from '@mui/material/Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
+export const runtime = "edge";
+
 const theme = createTheme({
   palette: {
     primary: {
