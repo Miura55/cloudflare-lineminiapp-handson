@@ -19,9 +19,9 @@ const Menu = () => {
   const [showCart, setShowCart] = useState(false);
   const [products] = useState<Product[]>([
     { id: 1, name: 'Latte', price: 4.5, image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg' },
-    { id: 2, name: 'Cappuccino', price: 4.0, image: 'https://images.pexels.com/photos/2878019/pexels-photo-2878019.jpeg' },
-    { id: 3, name: 'Espresso', price: 3.0, image: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg' },
-    { id: 4, name: 'Croissant', price: 3.5, image: 'https://images.pexels.com/photos/1070880/pexels-photo-1070880.jpeg' },
+    { id: 2, name: 'Cappuccino', price: 5.0, image: 'https://images.pexels.com/photos/533393/pexels-photo-533393.jpeg' },
+    { id: 3, name: 'Espresso', price: 3.0, image: 'https://images.pexels.com/photos/302894/pexels-photo-302894.jpeg' },
+    { id: 4, name: 'Croissant', price: 3.5, image: 'https://images.pexels.com/photos/3892469/pexels-photo-3892469.jpeg' },
   ]);
   const { liff } = useLiff();
 
