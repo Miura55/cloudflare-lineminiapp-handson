@@ -15,6 +15,7 @@ export const runtime = "edge";
 const Menu = () => {
   const [cart, setCart] = useState<Product[]>([]);
   const [lineAvater, setLineAvater] = useState<string>('');
+  const [lineUserName, setLineUserName] = useState<string>('');
   const [showCart, setShowCart] = useState(false);
   const [products] = useState<Product[]>([
     { id: 1, name: 'Latte', price: 4.5, image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg' },
@@ -28,6 +29,7 @@ const Menu = () => {
     if (liff?.isLoggedIn()) {
       liff.getProfile().then(profile => {
         setLineAvater(profile.pictureUrl ?? '');
+        setLineUserName(profile.displayName);
       });
     }
   })
@@ -131,6 +133,9 @@ const Menu = () => {
           <CartView />
         ) : (
           <main className="px-6 py-8">
+            <Typography variant="h4" component="h1" className="mb-4">
+              Welcome, {lineUserName || 'Guest'}
+            </Typography>
             <h2 className="text-2xl font-bold mb-4">Menu</h2>
             <Grid container spacing={4}>
               {products.map((product) => (
