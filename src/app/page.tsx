@@ -1,32 +1,20 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Card, CardContent, CardMedia, Typography, Button, Avatar, AppBar, Toolbar, Fab, Badge } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { MenuBook, PointOfSale } from '@mui/icons-material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useLiff } from './liffProvider';
+import theme from './theme';
+import { Product } from './types';
 
 export const runtime = "edge";
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#4CAF50',
-    },
-  },
-});
-
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-}
-
 const Menu = () => {
   const [cart, setCart] = useState<Product[]>([]);
+  const [lineAvater, setLineAvater] = useState<string>('');
   const [showCart, setShowCart] = useState(false);
   const [products] = useState<Product[]>([
     { id: 1, name: 'Latte', price: 4.5, image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg' },
@@ -34,6 +22,15 @@ const Menu = () => {
     { id: 3, name: 'Espresso', price: 3.0, image: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg' },
     { id: 4, name: 'Croissant', price: 3.5, image: 'https://images.pexels.com/photos/1070880/pexels-photo-1070880.jpeg' },
   ]);
+  const { liff } = useLiff();
+
+  useEffect(() => {
+    if (liff?.isLoggedIn()) {
+      liff.getProfile().then(profile => {
+        setLineAvater(profile.pictureUrl ?? '');
+      });
+    }
+  })
 
   const addToCart = (product: Product) => {
     setCart([...cart, product]);
@@ -120,9 +117,13 @@ const Menu = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Cloud Village
             </Typography>
-            <Avatar className="ml-4 hidden sm:flex">
-              <AccountCircleIcon />
-            </Avatar>
+            {lineAvater ? (
+              <Avatar alt="Line Avatar" src={lineAvater} />
+            ) : (
+              <Avatar className="ml-4 hidden sm:flex">
+                <AccountCircleIcon />
+              </Avatar>
+            )}
           </Toolbar>
         </AppBar>
 
