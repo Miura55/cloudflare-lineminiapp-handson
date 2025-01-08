@@ -1,15 +1,17 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Box, Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography, Button, Avatar, AppBar, Toolbar, Fab, Badge } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { MenuBook, PointOfSale } from '@mui/icons-material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const runtime = "edge";
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
       main: '#4CAF50',
     },
@@ -54,7 +56,7 @@ const Menu = () => {
   };
 
   const CartView = () => (
-    <div className="bg-white min-h-screen px-6 py-8">
+    <div className="bg-gray-800 min-h-screen px-6 py-8 text-white">
       <h2 className="text-2xl font-bold mb-4">Cart</h2>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -62,8 +64,8 @@ const Menu = () => {
         <div>
           <Grid container spacing={4}>
             {cart.map((product, index) => (
-              <Grid size={{xs: 12}} key={index}>
-                <Card className="flex justify-between items-center">
+              <Grid size={{ xs: 12 }} key={index}>
+                <Card className="flex justify-between items-center bg-gray-700 text-white">
                   <Box display="flex" alignItems="center">
                     <CardMedia
                       component="img"
@@ -112,16 +114,17 @@ const Menu = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="bg-white min-h-screen">
-        <header className="bg-primary py-4 px-6 text-white">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Cloud Village</h1>
-            <button onClick={() => setShowCart(!showCart)} className="flex items-center">
-              <ShoppingCartIcon />
-              <span>Cart ({cart.length})</span>
-            </button>
-          </div>
-        </header>
+      <div className="bg-gray-800 min-h-screen relative text-white">
+        <AppBar position="static" color="primary">
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Cloud Village
+            </Typography>
+            <Avatar className="ml-4 hidden sm:flex">
+              <AccountCircleIcon />
+            </Avatar>
+          </Toolbar>
+        </AppBar>
 
         {showCart ? (
           <CartView />
@@ -130,8 +133,8 @@ const Menu = () => {
             <h2 className="text-2xl font-bold mb-4">Menu</h2>
             <Grid container spacing={4}>
               {products.map((product) => (
-                <Grid size={{xs: 12, sm:6, md:4}} key={product.id}>
-                  <Card className="h-full">
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={product.id}>
+                  <Card className="h-full bg-gray-700 text-white">
                     <CardMedia
                       component="img"
                       height="140"
@@ -161,6 +164,21 @@ const Menu = () => {
             </Grid>
           </main>
         )}
+
+        <Fab
+          color="primary"
+          aria-label="cart"
+          onClick={() => setShowCart(!showCart)}
+          sx={{
+            position: 'fixed',
+            bottom: 16,
+            right: 16,
+          }}
+        >
+          <Badge badgeContent={cart.length} color="secondary">
+            {showCart ? <MenuBook /> : <PointOfSale />}
+          </Badge>
+        </Fab>
       </div>
     </ThemeProvider>
   );
