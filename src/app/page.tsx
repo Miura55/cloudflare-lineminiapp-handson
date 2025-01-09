@@ -14,6 +14,7 @@ export const runtime = "edge";
 
 const Menu = () => {
   const [cart, setCart] = useState<Product[]>([]);
+  const [lineUserId, setLineUserId] = useState<string>('');
   const [lineAvater, setLineAvater] = useState<string>('');
   const [lineUserName, setLineUserName] = useState<string>('');
   const [showCart, setShowCart] = useState(false);
@@ -28,6 +29,7 @@ const Menu = () => {
   useEffect(() => {
     if (liff?.isLoggedIn()) {
       liff.getProfile().then(profile => {
+        setLineUserId(profile.userId);
         setLineAvater(profile.pictureUrl ?? '');
         setLineUserName(profile.displayName);
       });
@@ -48,9 +50,18 @@ const Menu = () => {
     return cart.reduce((total, product) => total + product.price, 0);
   };
 
-  const submitOrder = () => {
-    // TODO: オーダー送信処理
+  const submitOrder = async () => {
     console.log('Submitting order:', cart);
+    await fetch('/api/data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        key: lineUserId,
+        value: cart,
+      }),
+    });
     setCart([]);
   };
 
