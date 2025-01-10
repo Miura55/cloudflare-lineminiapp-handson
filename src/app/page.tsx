@@ -33,8 +33,10 @@ const Menu = () => {
         setLineAvater(profile.pictureUrl ?? '');
         setLineUserName(profile.displayName);
       });
+    } else {
+      liff?.login();
     }
-  })
+  }, [])
 
   const addToCart = (product: Product) => {
     setCart([...cart, product]);
