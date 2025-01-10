@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# environment json
+config/develop.json
+config/production.json
+
+# wrangler
+/.wrangler

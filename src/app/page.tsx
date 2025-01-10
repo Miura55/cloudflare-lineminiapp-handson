@@ -36,7 +36,7 @@ const Menu = () => {
     } else {
       liff?.login();
     }
-  }, [])
+  })
 
   const addToCart = (product: Product) => {
     setCart([...cart, product]);

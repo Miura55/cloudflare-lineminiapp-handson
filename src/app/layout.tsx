@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LiffProvider } from "./liffProvider";
+import VConsole from "./components/VConsole";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,8 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <LiffProvider liffId={process.env.NEXT_PUBLIC_LIFF_ID ?? ""}>
+        <LiffProvider liffId={process.env.LIFF_ID ?? ""}>
           {children}
+          <VConsole />
         </LiffProvider>
       </body>
     </html>
