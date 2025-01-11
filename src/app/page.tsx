@@ -197,9 +197,12 @@ const Menu = () => {
             right: 16,
           }}
         >
-          <Badge badgeContent={cart.length} color="secondary">
-            {showCart ? <MenuBook /> : <PointOfSale />}
-          </Badge>
+          {showCart ?
+            <MenuBook /> :
+            <Badge badgeContent={cart.length} color="secondary">
+              <PointOfSale />
+            </Badge>
+          }
         </Fab>
       </div>
     </ThemeProvider>
