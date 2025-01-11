@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cloudflare PagesでLINEミニアプリをデプロイするハンズオン
+このリポジトリは、Cloudflare PagesでLINEミニアプリをデプロイするハンズオンのリポジトリです。
 
-## Getting Started
+## 事前準備
+- [LINE Developers](https://developers.line.biz/ja/)でプロバイダーを作成してください。
+- [Cloudflare](https://www.cloudflare.com/)にアカウントを作成してください。
 
-First, run the development server:
+## configファイルを作成
+`config` ディレクトリに `develop.json` と `production.json` を作成してください。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- `develop.json`: 開発用のミニアプリの設定情報
+```json
+{
+    "LIFF_ID": "開発用のLIFFID",
+    "ENABLE_VCONSOLE": "true"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `production.json`: 本番用のミニアプリの設定情報
+```json
+{
+    "LIFF_ID": "本番用のLIFFID",
+    "ENABLE_VCONSOLE": "false"
+}
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 依存関係をインストール
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ローカルでの開発
+```bash
+npm run preview
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Cloudflareにデプロイ
+```bash
+npm run deploy
+```

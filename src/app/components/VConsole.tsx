@@ -9,8 +9,8 @@ let vConsoleInstance: any = null
 export default function VConsole() {
   useEffect(() => {
     const initVConsole = async () => {
-      // 開発環境でのみvConsoleを読み込む
-      if (process.env.NODE_ENV === 'development' || process.env.ENABLE_VCONSOLE === 'true') {
+      // フラグを有効に設定したときのみvConsoleを読み込む
+      if (process.env.ENABLE_VCONSOLE === 'true') {
         try {
           // vConsoleを動的にインポート
           const VConsoleModule = await import('vconsole')

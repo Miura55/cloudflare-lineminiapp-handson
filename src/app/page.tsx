@@ -26,6 +26,7 @@ const Menu = () => {
   ]);
   const { liff } = useLiff();
 
+  // レンダリング時にLIFFでユーザー情報を取得
   useEffect(() => {
     if (liff?.isLoggedIn()) {
       liff.getProfile().then(profile => {
@@ -54,6 +55,7 @@ const Menu = () => {
 
   const submitOrder = async () => {
     console.log('Submitting order:', cart);
+    // 注文データをサーバーに送信
     await fetch('/api/data', {
       method: 'POST',
       headers: {
@@ -67,6 +69,7 @@ const Menu = () => {
     setCart([]);
   };
 
+  // 注文内容の確認と送信画面
   const CartView = () => (
     <div className="bg-gray-800 min-h-screen px-6 py-8 text-white">
       <h2 className="text-2xl font-bold mb-4">Cart</h2>
