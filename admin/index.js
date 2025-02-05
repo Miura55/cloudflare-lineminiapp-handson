@@ -1,64 +1,64 @@
 addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
+	event.respondWith(handleRequest(event.request))
 })
 
 async function handleRequest(request) {
-    // POSTリクエストかどうかをチェック
-    if (request.method === 'POST') {
-        // ユーザーが送信したフォームデータを取得
-        const formData = await request.formData()
-        const key = formData.get('key') // ユーザーが入力したキーを取得
+	// POSTリクエストかどうかをチェック
+	if (request.method === 'POST') {
+		// ユーザーが送信したフォームデータを取得
+		const formData = await request.formData()
+		const key = formData.get('key') // ユーザーが入力したキーを取得
 
-        // ユーザーが入力したキーに基づいてKVからデータを取得
-        const data = await WORKERS_KV.get(key)
+		// ユーザーが入力したキーに基づいてKVからデータを取得
+		const data = await KV_ORDER.get(key)
 
-        if (!data) {
-            return new Response('Item not found', { status: 404 })
-        }
+		if (!data) {
+			return new Response('Item not found', { status: 404 })
+		}
 
-        // 取得したデータをJSONに変換
-        const menu = JSON.parse(data)
+		// 取得したデータをJSONに変換
+		const menu = JSON.parse(data)
 
-        // HTMLの生成
-        const html = `
+		// HTMLの生成
+		const html = `
 		<html>
 		  <head>
-			<title>Menu</title>
-			<style>
-			  body {
-				font-family: Arial, sans-serif;
-				padding: 20px;
-			  }
-			  h1 {
-				text-align: center;
-			  }
-			  .menu-item {
-				margin: 10px 0;
-				display: flex;
-				align-items: center;
-			  }
-			  .menu-item img {
-				width: 100px;
-				height: 100px;
-				margin-right: 20px;
-			  }
-			</style>
-		  </head>
+        <title>Menu</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+          }
+          h1 {
+            text-align: center;
+          }
+          .menu-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+          }
+          .menu-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+          }
+          </style>
+        </head>
 		  <body>
-			<h1>Menu</h1>
-			${generateMenuItems(menu)}
+        <h1>Menu</h1>
+        ${generateMenuItems(menu)}
 		  </body>
 		</html>
 	  `
 
-        // HTMLレスポンスを返す
-        return new Response(html, {
-            headers: { 'Content-Type': 'text/html' },
-        })
-    }
+		// HTMLレスポンスを返す
+		return new Response(html, {
+			headers: { 'Content-Type': 'text/html' },
+		})
+	}
 
-    // GETリクエストの場合、フォームを表示する
-    const html = `
+	// GETリクエストの場合、フォームを表示する
+	const html = `
 	  <html>
 		<head>
 		  <title>Enter Key</title>
@@ -74,16 +74,16 @@ async function handleRequest(request) {
 	  </html>
 	`
 
-    // HTMLレスポンスを返す
-    return new Response(html, {
-        headers: { 'Content-Type': 'text/html' },
-    })
+	// HTMLレスポンスを返す
+	return new Response(html, {
+		headers: { 'Content-Type': 'text/html' },
+	})
 }
 
 // メニューアイテムをHTMLとして生成する関数
 function generateMenuItems(menu) {
-    return menu.map(item => {
-        return `
+	return menu.map(item => {
+		return `
 		<div class="menu-item">
 		  <img src="${item.image}" alt="${item.name}">
 		  <div>
@@ -92,5 +92,5 @@ function generateMenuItems(menu) {
 		  </div>
 		</div>
 	  `
-    }).join('')
+	}).join('')
 }
