@@ -4,5 +4,5 @@ compatibility_date = "2024-08-13"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 kv_namespaces = [
-  { binding = "KV_ORDER", id = "bef3c0078cd5466db761feb9a8615091" }
+  { binding = "KV_ORDER", id = "60e341a2f407411580b1f955e0f62eb3" }
 ]
