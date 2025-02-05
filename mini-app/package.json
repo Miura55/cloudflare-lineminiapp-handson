@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "pages:build": "npx @cloudflare/next-on-pages",
-    "preview": "APP_ENV=develop npm run pages:build && wrangler pages dev",
-    "deploy": "APP_ENV=production npm run pages:build && wrangler pages deploy"
+    "preview": "npx cross-env APP_ENV=develop npm run pages:build && wrangler pages dev",
+    "deploy": "npx cross-env APP_ENV=production npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250109.0",
@@ -29,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.1.3",
     "typescript": "^5",
