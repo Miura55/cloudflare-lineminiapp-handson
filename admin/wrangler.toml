@@ -1,0 +1,8 @@
+# wrangler.toml
+name = "cloudflare-line-miniapp-hands-on-admin"
+main = "index.js"
+compatibility_date = "2024-08-13"
+compatibility_flags = ["nodejs_compat"]
+kv_namespaces = [
+  { binding = "KV_ORDER", id = "60e341a2f407411580b1f955e0f62eb3" }
+]
